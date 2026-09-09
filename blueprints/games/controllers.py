@@ -5,7 +5,7 @@ from blueprints.categorias.dao import CategoriaDAO
 from .models import Jogo, Fisico, Digital
 from werkzeug.utils import secure_filename
 import traceback
-
+from blueprints.users.controllers import login_required
 
 class JogoController:
 
@@ -98,21 +98,15 @@ class JogoController:
                 flash(f"Erro ao cadastrar jogo: {str(e)}", "danger")
                 return self.preparar_cadastro()
 
+    @login_required
     def preparar_cadastro(self):
-        if 'usuario' not in session:
-            flash("Erro: deve estar logado para essa função", "danger")
-            return redirect(url_for("user.erro"))
-        else:
             categorias = self.__categoria_dao.carregar_categorias()
             plataformas = self.__dao.carregar_plataformas()
             return render_template("cadastrar.html", categorias = categorias, plataformas = plataformas)
 
     # PREPARAR EDIÇÃO
+    @login_required
     def preparar_edicao(self, id):
-        if 'usuario' not in session:
-            flash("Erro: deve estar logado para essa função", "danger")
-            return redirect(url_for("user.erro"))
-        else:
             jogo = self.__dao.buscar_jogo_por_id(id)
             categorias = self.__categoria_dao.carregar_categorias()
             plataformas = self.__dao.carregar_plataformas()
@@ -194,11 +188,8 @@ class JogoController:
             return redirect(url_for("games.editar_jogo", id=id))
 
     # REMOVER
+    @login_required
     def remover_jogo(self, id):
-        if 'usuario' not in session:
-                flash("Erro: deve estar logado para essa função", "danger")
-                return redirect(url_for("user.erro"))
-        else:
                 self.__dao.remover_jogo(id)
                 flash("Sucesso: Jogo removido com sucesso!", "success")
                 return redirect(url_for("games.listar_jogos"))
@@ -231,9 +222,9 @@ class JogoController:
             plataformas.append(p)
         comentarios = self.__dao.selecionar_comentario(id)
         return render_template("detalhe.html", jogo=jogo, comentarios=comentarios, plataformas=plataformas)
-    
+
+    @login_required
     def enviar_comentario(self):
-        if session.get("usuario"):
             comentario = request.form.get("comentario")
             id_autor = session.get("user_id")
             id_jogo = int(request.form.get("id_jogo"))
@@ -260,9 +251,6 @@ class JogoController:
             jogo = self.__dao.buscar_jogo_por_id(id_jogo)
 
             return render_template("detalhe.html", jogo=jogo, comentarios=comentarios)
-        else:
-            flash("Erro: deve estar logado para essa função", "danger")
-            return redirect(url_for("user.erro"))
     
     def excluir_comentario(self, id):
         if session.get("usuario"):        

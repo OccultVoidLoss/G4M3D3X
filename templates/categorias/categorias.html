@@ -3,9 +3,8 @@
 {% block content %}
   <div class="d-flex justify-content-between align-items-center mb-3">
     <h3>Categorias Cadastradas</h3>
-      {% if session.get('admin') %}
+
     <a href="{{ url_for('categorias.cadastrar_categoria') }}" class="btn btn-primary">+ Nova Categoria</a>
-    {% endif %}
   </div>
 
   <div class="table-responsive">
@@ -22,7 +21,7 @@
           <tr>
             <td>{{ c.nome }}</td>
           </tr>
-            {% if session.get('admin') %}
+
                       <td>
               <a href="{{ url_for('categorias.editar_categoria', id=c.id) }}" class="btn btn-warning">Editar</a>
             </td>
@@ -31,7 +30,7 @@
                 <button type="submit" class="btn btn-danger">Excluir</button>
               </form>
             </td>
-            {% endif %}
+
         {% else %}
           <tr>
             <td colspan="1" class="text-center">Nenhuma categoria cadastrada.</td>

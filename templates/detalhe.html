@@ -74,7 +74,6 @@
 
 
 </div>
-{% if session.get("user_id") == jogo.autor or session.get("admin")%}
       <div class="d-flex gap-2" style="margin-top: 50px;">
       <a href="{{ url_for('games.editar_jogo', id=jogo.id) }}" class="btn btn-warning">
       Editar
@@ -91,7 +90,6 @@
       <br>
       <br>
      <h3 class="comment-title">Comentários:</h3>
-{% endif %}
 <form method="POST" action="{{ url_for('games.comentar') }}" class="comment-form">
   <textarea name="comentario" class="comment-input" placeholder="Escreva seu comentário..."></textarea>
   <input type="hidden" name="id_jogo" value="{{ jogo.id }}">

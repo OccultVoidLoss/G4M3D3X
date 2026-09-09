@@ -1,6 +1,7 @@
 from flask import Flask, render_template, request, redirect, url_for, flash, session
 from .dao import CategoriaDAO
 from .models import Categoria
+from blueprints.users.controllers import login_required, admin_required
 
 class CategoriaController:
 
@@ -11,11 +12,8 @@ class CategoriaController:
         lista = self.__dao.carregar_categorias()
         return render_template("categorias/categorias.html",categorias=lista)
 
+    @admin_required
     def preparar_cadastro(self):
-        if not session.get("admin"):
-            flash("Erro: deve ser Admin para essa função", "danger")
-            return redirect(url_for("user.erro"))
-        else:
             return render_template("categorias/cadastrar.html")
 
     def cadastrar_categoria(self):

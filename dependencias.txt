@@ -1,0 +1,9 @@
+LINUX-
+python3 -m venv .venv
+. .venv/bin/activate
+pip install PyJWT flask requests dotenv mysql-connector-python bcrypt werkzeug
+
+WINDOWS-
+py -3 -m venv .venv
+.venv\Scripts\activate
+pip install PyJWT flask requests dotenv mysql-connector-python bcrypt werkzeug

@@ -4,6 +4,66 @@ from .models import User, Comum, Admin
 import bcrypt
 from datetime import datetime, timedelta, timezone
 import jwt
+from functools import wraps
+
+def login_required(func):
+    @wraps(func)
+    def wrapper(*args, **kwargs):
+        auth = request.headers.get("Authorization")
+        if auth:
+             try:
+                token = auth.split(" ")[1]
+            
+                payload = jwt.decode(
+                            token,
+                            current_app.config["JWT_SECRET"],
+                            algorithms=["HS256"]
+                        )
+            
+                dao = UserDAO()
+                user_id = int(payload["sub"])
+            
+            
+                user = dao.buscar_user_por_id(user_id)
+                if user:
+                    return func(*args, **kwargs)
+                else:
+                    return jsonify({"Erro": "Usuário não encontrado"}), 401
+             except jwt.InvalidTokenError:
+                return jsonify({"Erro": "Token inválido"}), 401
+        else:
+            return jsonify({"Erro": "Token inválido"}), 401
+    return wrapper
+
+
+def admin_required(func):
+    @wraps(func)
+    def wrapper(*args, **kwargs):
+        auth = request.headers.get("Authorization")
+        if auth:
+             try:
+                token = auth.split(" ")[1]
+            
+                payload = jwt.decode(
+                            token,
+                            current_app.config["JWT_SECRET"],
+                            algorithms=["HS256"]
+                        )
+            
+                dao = UserDAO()
+                user_id = int(payload["sub"])
+            
+            
+                user = dao.buscar_user_por_id(user_id)
+                if user.tipo() == "admin":
+                    return func(*args, **kwargs)
+                else:
+                    return jsonify({"Erro": "Deve ser admin"}), 403
+             except jwt.InvalidTokenError:
+                return jsonify({"Erro": "Token inválido"}), 401
+        else:
+            return jsonify({"Erro": "Token inválido"}), 401
+    return wrapper
 
 class UserController:
 
@@ -89,27 +149,20 @@ class UserController:
     def preparar_login(self):
         return render_template("users/login.html")
     
-    def encerrar(self):
-        session.pop('usuario', None)
-        session.pop('admin', None)
-        return redirect(url_for("user.index"))
+
 
 
     def erro(self):
         return render_template("erro.html")
 
     #REMOVER
+    @admin_required
     def remover_user(self, id):
         self.__dao.remover_user(id)
-        flash("Sucesso: User removido com sucesso!", "success")
-        if (session.get("admin") and id != session.get("user_id")):
-            return redirect(url_for("user.admin_user"))
-        else:
-            return self.encerrar()
+        return jsonify({"mensagem": "usuário removido"}), 200
+
+    @admin_required
     def admin(self):
-        if not session.get("admin"):
-            flash("Acesso negado", "danger")
-            return redirect(url_for("user.erro"))
         return render_template("admin/admin.html")
     
     def creditos(self):
@@ -117,7 +170,8 @@ class UserController:
     
     def painel(self):
             return render_template("users/painel.html")
-    
+
+    @login_required
     def painel_api(self):
         auth = request.headers.get("Authorization")
 
@@ -149,9 +203,11 @@ class UserController:
         except jwt.InvalidTokenError:
             return jsonify({"Erro": "Token inválido"}), 401
 
+    @login_required
     def preparar_edicao(self,id):
         user = self.__dao.buscar_user_por_id(id)
         return render_template("users/editar.html")
+
 
     def editar_user(self, id):
         dados = request.get_json()
