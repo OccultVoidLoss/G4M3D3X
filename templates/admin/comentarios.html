@@ -1,0 +1,38 @@
+{% extends 'base.html' %}
+{% block titulo %} Comentários {% endblock %}
+{% block content %}
+
+  <div class="table-responsive container py-4">
+    <table class="table table-striped table-hover bg-white shadow-sm">
+      <thead class="table-dark">
+        <tr>
+          <th>Comentário</th>
+          <th>Ações</th>
+        </tr>
+      </thead>
+      <tbody>
+        {% for c in comentarios %}
+          <tr>
+            <td>{{ c.Comentario }}</td>
+            
+            <td>
+              <form action="{{ url_for('games.aprovar_comentario_controle') }}" method="POST" style="display: inline;">
+                <input type="hidden" name="id_comentario" value="{{ c.Id }}">
+                <button type="submit" class="btn btn-success btn-sm">Aprovar</button>
+              </form>
+
+              <form action="{{ url_for('games.rejeitar_comentario_controle') }}" method="POST" style="display: inline;">
+                <input type="hidden" name="id_comentario" value="{{ c.Id }}">
+                <button type="submit" class="btn btn-danger btn-sm">Rejeitar</button>
+              </form>
+            </td>
+          </tr>
+        {% else %}
+          <tr>
+            <td colspan="2" class="text-center">Nenhum comentário pendente.</td>
+          </tr>
+        {% endfor %}
+      </tbody>
+    </table>
+  </div>
+{% endblock %}

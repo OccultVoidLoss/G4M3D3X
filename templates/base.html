@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="pt-br"> 
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>{% block titulo %}Nossa LanHouse {% endblock %} </title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet" />
+    <link rel="stylesheet" href="{{ url_for ('static', filename= 'css/style.css')}}">
+    <style>
+        a.disabled{
+          pointer-events: none;
+          color: rgb(91, 91, 92);
+        }
+      </style>
+  </head>
+  <body class="bg-light">
+    <nav class="navbar navbar-expand-lg navbar-dark bg-dark mb-4">
+        <div class="container" id="logo">
+              <a class="navbar-brand d-flex align-items-center gap-2 brand-link" 
+              href="{{ url_for('games.index') }}" id="brand">
+              <img src="{{ url_for('static', filename='uploads/logo.png') }}" class="logo-img">
+              <span id="sitename">G4M3D3X</span>
+
+                </a>
+        <div class="navbar-nav">
+          <a class="nav-link" href="{{ url_for('games.listar_jogos') }}">J0G05</a>
+
+        
+          <a class="nav-link" href="{{ url_for('user.cadastrar_user') }}" id="cadastro">C4D45TR0</a>
+          <a class="nav-link" href="{{url_for('user.login')}}" id="login">L0G1N</a>
+        
+
+        
+          <a class="nav-link" href="{{ url_for('user.admin')}}" id="admin" style="display: none;"> 4DM1N</a>
+        
+        <a class="nav-link" href="{{ url_for ('user.creditos')}}"> CR3D1T05</a>
+        </div>
+      </div>
+      <div>
+
+        <form action="{{url_for('user.painel')}}" id="painel" method="POST">
+          <button type="submit">Painel</button>
+        </form>
+ 
+
+      </div>
+    </nav>
+
+    <div class="container">
+      <div  role="alert" id="mensagem">
+        
+      </div>
+
+      {% block content %}
+      {% endblock %}
+    </div>
+    </div>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    
+    <script src="static/js/base.js"></script>
+  </body>
+</html>

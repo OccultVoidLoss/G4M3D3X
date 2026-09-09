@@ -1,0 +1,1013 @@
+
+:root {
+  --bg-main: #0b0b0c;
+  --bg-secondary: #141416;
+  --bg-card: #1c1c1f;
+
+  --accent: #ff6a00;
+  --accent-soft: #ff8c42;
+
+  --text-main: #e5e5e5;
+  --text-muted: #8b8b90;
+
+  --border: #2a2a2e;
+
+  --glow: 0 0 8px rgba(255, 106, 0, 0.6);
+}
+
+/* ====== RESET ====== */
+body {
+  background: radial-gradient(circle at top, #111, #050505);
+  color: var(--text-main);
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+/* ====== NAVBAR ====== */
+.navbar {
+  background: rgba(10, 10, 10, 0.95) !important;
+  backdrop-filter: blur(6px);
+  border-bottom: 1px solid var(--border);
+}
+
+.navbar-brand {
+  color: var(--accent) !important;
+  font-weight: bold;
+  letter-spacing: 2px;
+  text-shadow: var(--glow);
+}
+
+.nav-link {
+  color: var(--text-main) !important;
+  position: relative;
+}
+
+.nav-link::after {
+  content: "";
+  width: 0%;
+  height: 2px;
+  background: var(--accent);
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  transition: 0.3s;
+}
+
+.nav-link:hover::after {
+  width: 100%;
+}
+
+.nav-link:hover {
+  color: var(--accent) !important;
+}
+
+/* ====== CARDS ====== */
+.card {
+  background: linear-gradient(145deg, #1a1a1d, #101012);
+  border: 1px solid var(--border);
+  border-radius: 12px;
+  box-shadow: 0 0 10px rgba(0,0,0,0.8);
+  transition: 0.3s;
+}
+
+.card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 0 15px rgba(255,106,0,0.2);
+}
+
+/* ====== FORM ====== */
+.form-control {
+  background: var(--bg-secondary);
+  border: 1px solid var(--border);
+  color: var(--text-main);
+  transition: 0.2s;
+}
+
+.form-control:focus {
+  border-color: var(--accent);
+  box-shadow: var(--glow);
+  background: var(--bg-secondary);
+  color: white;
+}
+
+/* ====== BOTÕES ====== */
+.btn {
+  border-radius: 8px;
+  font-weight: bold;
+  letter-spacing: 0.5px;
+  transition: 0.25s;
+}
+
+/* principal */
+.btn-primary,
+.btn-success {
+  background: linear-gradient(135deg, #ff6a00, #ff8c42);
+  border: none;
+  color: black;
+}
+
+.btn-primary:hover,
+.btn-success:hover {
+  transform: scale(1.05);
+  box-shadow: var(--glow);
+}
+
+/* editar */
+.btn-warning {
+  background: #ff8800;
+  border: none;
+}
+
+/* excluir */
+.btn-danger {
+  background: #b02a2a;
+  border: none;
+}
+
+/* botão sair */
+button:not(.btn-close) {
+  background: transparent;
+  border: 1px solid var(--accent);
+  color: var(--accent);
+}
+
+button:hover {
+  background: var(--accent);
+  color: black;
+  box-shadow: var(--glow);
+}
+
+/* ====== ALERTAS ====== */
+.alert {
+  background: #1a1a1d;
+  border-left: 4px solid var(--accent);
+  color: var(--text-main);
+}
+
+/* ====== IMAGENS ====== */
+.gameimg {
+  max-width: 220px;
+  border-radius: 10px;
+  transition: 0.3s;
+  margin: 10px;
+  filter: brightness(0.9);
+}
+
+.gameimg:hover {
+  transform: scale(1.08);
+  filter: brightness(1.1);
+  box-shadow: var(--glow);
+}
+
+
+/* ====== GRID DE JOGOS ====== */
+.game-grid {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 15px;
+}
+
+/* ====== SCROLLBAR ====== */
+::-webkit-scrollbar {
+  width: 8px;
+}
+
+::-webkit-scrollbar-track {
+  background: #111;
+}
+
+::-webkit-scrollbar-thumb {
+  background: var(--accent);
+  border-radius: 10px;
+}
+
+/* ====== TEXTO ====== */
+h1, h2, h3 {
+  letter-spacing: 1px;
+}
+h1, #sitename{
+    font-family: hitech;
+    color: #ff6a00;
+}
+/* ====== DISABLED ====== */
+a.disabled {
+  pointer-events: none;
+  color: var(--text-muted) !important;
+}
+
+/* ====== EFEITO GLITCH (opcional) ====== */
+.glitch {
+  position: relative;
+  color: var(--accent);
+}
+
+.glitch::before,
+.glitch::after {
+  content: attr(data-text);
+  position: absolute;
+  left: 0;
+}
+
+.glitch::before {
+  color: red;
+  top: -1px;
+  left: 1px;
+  opacity: 0.5;
+}
+
+.glitch::after {
+  color: cyan;
+  top: 1px;
+  left: -1px;
+  opacity: 0.5;
+}
+
+
+
+
+@font-face {
+  font-family: 'hitech';
+  src: url('../fonts/hitech.ttf') format('truetype');
+  font-weight: normal;
+  font-style: normal;
+}
+
+/* remove estilo padrão do link no brand */
+.brand-link {
+  text-decoration: none;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+/* mantém cor mesmo sendo <a> */
+.brand-link:hover {
+  text-decoration: none;
+  color: var(--accent);
+}
+
+/* LOGO */
+.logo-img {
+  width: 38px;
+  height: 38px;
+  object-fit: contain;
+  border-radius: 8px; /* deixa mais moderno */
+  box-shadow: 0 0 8px rgba(255, 106, 0, 0.35);
+  transition: 0.3s ease;
+}
+
+/* efeito leve ao passar o mouse */
+.logo-img:hover {
+  transform: scale(1.1) rotate(-2deg);
+  box-shadow: 0 0 12px rgba(255, 106, 0, 0.6);
+}
+
+/* alinhamento do brand */
+#brand {
+  display: flex;
+  align-items: center;
+}
+
+/* ====== ADMIN TABLE (FORÇA TOTAL NO TEMA) ====== */
+.table {
+  background: #0b0b0c !important;
+  color: #e5e5e5 !important;
+  border-radius: 14px;
+  overflow: hidden;
+  border: 1px solid rgba(255, 106, 0, 0.25);
+  box-shadow: 0 0 20px rgba(0, 0, 0, 0.8);
+}
+
+/* REMOVE qualquer branco do bootstrap */
+.table,
+.table tbody,
+.table tr,
+.table td {
+  background-color: #0b0b0c !important;
+}
+
+/* HEADER FORTE (zera cinza feio do bootstrap) */
+.table thead {
+  background: #ff6a00 !important;
+  color: #0b0b0c !important;
+  text-transform: uppercase;
+  letter-spacing: 2px;
+  font-weight: bold;
+}
+
+/* garante que TH não vire cinza */
+.table th {
+  background: #ff6a00 !important;
+  color: #0b0b0c !important;
+  border: none !important;
+}
+
+/* linhas */
+.table tbody tr {
+  border-bottom: 1px solid rgba(255, 106, 0, 0.1);
+  transition: 0.2s ease;
+}
+
+/* hover mais agressivo */
+.table tbody tr:hover {
+  background: rgba(255, 106, 0, 0.08) !important;
+  transform: scale(1.01);
+  box-shadow: inset 0 0 12px rgba(255, 106, 0, 0.2);
+}
+
+/* células */
+.table td {
+  border: none !important;
+  color: #e5e5e5 !important;
+  padding: 14px;
+}
+
+/* destaque do email */
+.table td:first-child {
+  color: #ff8c42 !important;
+  font-weight: bold;
+}
+
+/* botão delete */
+.table .btn-danger {
+  background: linear-gradient(135deg, #b02a2a, #ff3b3b);
+  border: none;
+  padding: 6px 14px;
+  border-radius: 8px;
+}
+
+.table .btn-danger:hover {
+  transform: scale(1.05);
+  box-shadow: 0 0 10px rgba(255, 60, 60, 0.4);
+}
+
+/* container */
+.table-responsive {
+  border-radius: 14px;
+  overflow: hidden;
+  border: 1px solid rgba(255, 106, 0, 0.25);
+  box-shadow: 0 0 25px rgba(0, 0, 0, 0.7);
+  background: #0b0b0c;
+}
+
+/* ====== COMENTÁRIOS ====== */
+
+.comment-title {
+  margin-top: 30px;
+  color: var(--accent);
+  text-shadow: var(--glow);
+  letter-spacing: 1px;
+  border-left: 4px solid var(--accent);
+  padding-left: 10px;
+}
+
+/* FORM DE COMENTÁRIO */
+.comment-form {
+  background: var(--bg-card);
+  padding: 15px;
+  border-radius: 12px;
+  border: 1px solid var(--border);
+  box-shadow: 0 0 12px rgba(0,0,0,0.6);
+  margin-bottom: 20px;
+}
+
+.comment-input {
+  width: 100%;
+  min-height: 80px;
+  resize: none;
+
+  background: var(--bg-secondary);
+  border: 1px solid var(--border);
+  border-radius: 8px;
+
+  color: var(--text-main);
+  padding: 10px;
+
+  outline: none;
+  transition: 0.2s;
+}
+
+.comment-input:focus {
+  border-color: var(--accent);
+  box-shadow: var(--glow);
+}
+
+/* CARD DO COMENTÁRIO */
+.comment-card {
+  background: linear-gradient(145deg, #141416, #0f0f10);
+  border: 1px solid rgba(255, 106, 0, 0.15);
+  border-left: 4px solid var(--accent);
+
+  padding: 12px 15px;
+  border-radius: 10px;
+
+  margin-bottom: 12px;
+
+  transition: 0.25s ease;
+}
+
+.comment-card:hover {
+  transform: translateX(5px);
+  box-shadow: 0 0 12px rgba(255, 106, 0, 0.15);
+}
+
+/* AUTOR */
+.comment-author {
+  color: var(--accent-soft);
+  margin-bottom: 5px;
+}
+
+/* TEXTO */
+.comment-text {
+  color: var(--text-main);
+}
+
+/* BOTÃO EXCLUIR MENOR */
+.btn-sm {
+  padding: 4px 10px;
+  font-size: 12px;
+  border-radius: 6px;
+}
+
+#detail {
+  max-width: 500px;
+  max-height: 500px;
+}
+
+/* ====== CATEGORIAS NO FORM (TAGS CLICÁVEIS) ====== */
+
+.category-form {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+}
+
+/* esconde o checkbox real */
+.category-form input[type="checkbox"] {
+  display: none;
+}
+
+/* label vira a tag clicável */
+.category-form label {
+  background: #141416;
+  color: var(--text-main);
+
+  padding: 6px 14px;
+  border-radius: 999px;
+
+  font-size: 13px;
+  font-weight: bold;
+  letter-spacing: 0.5px;
+
+  border: 1px solid rgba(255, 106, 0, 0.25);
+
+  cursor: pointer;
+  transition: 0.25s ease;
+
+  box-shadow: 0 0 6px rgba(0,0,0,0.4);
+}
+
+/* hover */
+.category-form label:hover {
+  border-color: var(--accent);
+  box-shadow: 0 0 10px rgba(255, 106, 0, 0.4);
+  transform: translateY(-1px);
+}
+
+/* quando selecionado */
+.category-form input[type="checkbox"]:checked + label {
+  background: linear-gradient(135deg, #ff6a00, #ff8c42);
+  color: #0b0b0c;
+  border-color: transparent;
+  box-shadow: 0 0 14px rgba(255, 106, 0, 0.8);
+}
+
+/* ====== CATEGORIAS (DETALHES STYLE FNAF) ====== */
+
+.category-container {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  margin: 15px 0;
+  padding: 10px;
+  background: rgba(20, 20, 22, 0.6);
+  border: 1px solid rgba(255, 106, 0, 0.2);
+  border-radius: 12px;
+}
+
+.category-badge {
+  display: inline-block;
+
+  padding: 6px 14px;
+  border-radius: 999px;
+
+  background: linear-gradient(145deg, #1a1a1d, #0f0f10);
+  color: #ff8c42;
+
+  font-size: 13px;
+  font-weight: bold;
+  letter-spacing: 0.5px;
+
+  border: 1px solid rgba(255, 106, 0, 0.25);
+
+  cursor: default;
+
+  transition: 0.25s ease;
+
+  box-shadow: 0 0 6px rgba(0,0,0,0.5);
+}
+
+.category-badge:hover {
+  transform: translateY(-2px) scale(1.05);
+  background: linear-gradient(135deg, #ff6a00, #ff8c42);
+  color: #0b0b0c;
+
+  box-shadow: 0 0 14px rgba(255, 106, 0, 0.7);
+}
+/* ====== LAYOUT DETALHES (ARRUMA SUMIÇO VISUAL) ====== */
+
+#detail {
+  max-width: 450px;
+  max-height: 450px;
+  display: block;
+  margin-bottom: 15px;
+  border-radius: 12px;
+  box-shadow: 0 0 12px rgba(255, 106, 0, 0.25);
+}
+
+/* separa visualmente o bloco do jogo */
+.game-details {
+  padding: 15px;
+  background: var(--bg-card);
+  border: 1px solid rgba(255, 106, 0, 0.15);
+  border-radius: 12px;
+  margin-bottom: 20px;
+}
+
+/* impede “sumir” quando página cresce */
+.category-container {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  margin: 15px 0;
+
+  position: relative;
+  z-index: 2;
+}
+
+/* garante que badge nunca encolhe estranho */
+.category-badge {
+  flex: 0 0 auto;
+  white-space: nowrap;
+}
+
+
+.texto-form{
+  color: #ff6a00 !important;
+}
+
+.admin{
+    font-weight: bold;
+    background: linear-gradient(
+        90deg,
+        red,
+        orange,
+        yellow,
+        lime,
+        cyan,
+        blue,
+        violet,
+        red
+    );
+
+    background-size: 400%;
+    
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+
+    animation: rainbow 5s linear infinite;
+    text-shadow:
+        0 0 5px rgba(255,255,255,0.5),
+        0 0 10px rgba(255,255,255,0.3);
+}
+
+@keyframes rainbow{
+    0%{
+        background-position: 0%;
+    }
+
+    100%{
+        background-position: 400%;
+    }
+}
+
+/* ====== SELECT (GLOBAL - jogos + usuário) ====== */
+.form-select {
+  background: var(--bg-secondary);
+  color: var(--text-main);
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  padding: 10px 12px;
+  transition: 0.25s ease;
+  cursor: pointer;
+}
+
+/* foco neon laranja */
+.form-select:focus {
+  border-color: var(--accent);
+  box-shadow: var(--glow);
+  background: #0f0f12;
+  color: #fff;
+}
+
+/* opções dentro do select */
+.form-select option {
+  background: #0b0b0c;
+  color: var(--text-main);
+}
+
+/* hover visual (alguns browsers suportam) */
+.form-select:hover {
+  border-color: var(--accent-soft);
+  box-shadow: 0 0 10px rgba(255, 106, 0, 0.25);
+}
+
+select[name="tipo"] {
+  border: 1px solid rgba(255, 106, 0, 0.4);
+  background: linear-gradient(145deg, #111, #0a0a0a);
+  font-weight: bold;
+  letter-spacing: 1px;
+}
+
+/* efeito mais “warning system” */
+select[name="tipo"]:focus {
+  box-shadow: 0 0 12px rgba(255, 0, 0, 0.4), var(--glow);
+}
+
+/* ====== TEXTOS DA PÁGINA DE DETALHE ====== */
+.game-details p {
+  margin: 6px 0;
+  padding: 6px 10px;
+  background: rgba(20, 20, 22, 0.4);
+  border-left: 3px solid var(--accent);
+  border-radius: 6px;
+
+  color: var(--text-main);
+  font-size: 14px;
+  line-height: 1.4;
+
+  transition: 0.2s ease;
+}
+
+/* hover leve estilo “scanner” */
+.game-details p:hover {
+  transform: translateX(5px);
+  border-left-color: var(--accent-soft);
+  box-shadow: 0 0 10px rgba(255, 106, 0, 0.15);
+}
+
+/* destaque nos labels (ex: Desenvolvedora:) */
+.game-details p strong {
+  color: var(--accent);
+  letter-spacing: 0.5px;
+}
+
+/* ====== TÍTULO DO JOGO (IMPACTO) ====== */
+.game-title {
+  font-family: hitech;
+  font-size: 32px;
+  color: var(--accent);
+  text-shadow: 0 0 10px rgba(255,106,0,0.6);
+  letter-spacing: 2px;
+  margin-bottom: 15px;
+}
+
+/* ====== CONTAINER DE DETALHES ====== */
+.game-details {
+  background: linear-gradient(145deg, #101012, #0b0b0c);
+  border: 1px solid rgba(255, 106, 0, 0.15);
+  border-radius: 14px;
+  padding: 20px;
+  box-shadow: 0 0 20px rgba(0,0,0,0.8);
+}
+
+/* ====== LINHAS DE INFO ESTILO "SISTEMA" ====== */
+.game-info p {
+  margin: 8px 0;
+  padding: 10px 12px;
+  border-left: 3px solid rgba(255,106,0,0.4);
+  background: rgba(20, 20, 22, 0.35);
+  border-radius: 8px;
+
+  transition: 0.25s ease;
+}
+
+/* hover tipo “scanner” */
+.game-info p:hover {
+  transform: translateX(6px);
+  border-left-color: var(--accent);
+  box-shadow: 0 0 12px rgba(255,106,0,0.15);
+}
+
+/* ====== LABEL (DESENVOLVEDORA, DATA...) ====== */
+.label {
+  color: var(--accent);
+  font-weight: bold;
+  letter-spacing: 0.5px;
+  margin-right: 5px;
+}
+
+/* ====== VALOR ====== */
+.value {
+  color: var(--text-main);
+}
+
+/* ====== SINOPSE MAIS “HISTÓRIA” ====== */
+.sinopse {
+  margin-top: 12px;
+  padding: 12px;
+  background: rgba(10,10,12,0.6);
+  border: 1px solid rgba(255,106,0,0.15);
+  border-radius: 10px;
+
+  color: #cfcfcf;
+  line-height: 1.6;
+}
+
+/* destaque visual extra na imagem */
+#detail {
+  border: 2px solid rgba(255,106,0,0.25);
+  box-shadow: 0 0 20px rgba(255,106,0,0.2);
+}
+/* ====== GRID FLEX DOS DADOS ====== */
+.game-info {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12px;
+  margin-top: 15px;
+}
+
+/* ====== CARD DE INFO ====== */
+.info-card {
+  flex: 1 1 220px;
+
+  background: linear-gradient(145deg, #141416, #0f0f10);
+  border: 1px solid rgba(255, 106, 0, 0.2);
+  border-radius: 12px;
+
+  padding: 12px 14px;
+
+  box-shadow: 0 0 10px rgba(0,0,0,0.6);
+  transition: 0.25s ease;
+
+  position: relative;
+  overflow: hidden;
+}
+
+/* efeito de brilho passando */
+.info-card::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 100%;
+  height: 100%;
+
+  background: linear-gradient(
+    120deg,
+    transparent,
+    rgba(255, 106, 0, 0.08),
+    transparent
+  );
+
+  transition: 0.6s;
+}
+
+/* hover animado */
+.info-card:hover {
+  transform: translateY(-4px) scale(1.02);
+  border-color: var(--accent);
+  box-shadow: 0 0 15px rgba(255,106,0,0.25);
+}
+
+.info-card:hover::before {
+  left: 100%;
+}
+
+/* ====== LABEL ====== */
+.info-card .label {
+  display: block;
+  font-size: 12px;
+  color: var(--accent);
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  margin-bottom: 6px;
+}
+
+/* ====== VALUE ====== */
+.info-card .value {
+  color: var(--text-main);
+  font-size: 15px;
+  font-weight: 500;
+}
+
+/* ====== SINOPSE (continua separada) ====== */
+.sinopse {
+  margin-top: 15px;
+  padding: 14px;
+  background: rgba(10,10,12,0.6);
+  border: 1px solid rgba(255,106,0,0.15);
+  border-radius: 12px;
+  line-height: 1.6;
+  color: #cfcfcf;
+}
+
+/* ====== PAINEL DO USUÁRIO ====== */
+
+.profile-panel {
+    max-width: 1000px;
+
+    margin: 40px auto;
+
+    display: flex;
+    gap: 30px;
+
+    background: linear-gradient(
+        145deg,
+        #141416,
+        #0b0b0c
+    );
+
+    border: 1px solid rgba(255,106,0,0.2);
+    border-radius: 16px;
+
+    padding: 30px;
+
+    box-shadow:
+        0 0 20px rgba(0,0,0,0.8),
+        0 0 15px rgba(255,106,0,0.08);
+}
+
+/* coluna esquerda */
+.profile-info {
+    flex: 1;
+}
+
+/* título */
+.profile-title {
+    margin-bottom: 25px;
+
+    color: var(--accent);
+
+    text-shadow: var(--glow);
+
+    letter-spacing: 2px;
+}
+
+/* cards das informações */
+.profile-item {
+    background: rgba(20,20,22,0.6);
+
+    border-left: 4px solid var(--accent);
+
+    padding: 14px;
+
+    margin-bottom: 12px;
+
+    border-radius: 8px;
+
+    transition: 0.25s;
+}
+
+.profile-item:hover {
+    transform: translateX(6px);
+
+    box-shadow:
+        0 0 12px rgba(255,106,0,0.15);
+}
+
+/* label */
+.profile-item .label {
+    display: block;
+
+    color: var(--accent);
+
+    font-size: 12px;
+
+    text-transform: uppercase;
+
+    letter-spacing: 1px;
+
+    margin-bottom: 5px;
+}
+
+/* valor */
+.profile-item .value {
+    color: var(--text-main);
+
+    font-size: 16px;
+}
+
+/* coluna direita */
+.profile-avatar {
+    width: 260px;
+
+    display: flex;
+    flex-direction: column;
+
+    align-items: center;
+    justify-content: center;
+}
+
+/* espaço da foto */
+.avatar-placeholder {
+    width: 180px;
+    height: 180px;
+
+    border-radius: 16px;
+
+    border: 2px dashed rgba(255,106,0,0.4);
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    color: var(--accent);
+
+    font-weight: bold;
+    letter-spacing: 2px;
+
+    background:
+        linear-gradient(
+            145deg,
+            #111,
+            #080808
+        );
+
+    transition: 0.3s;
+}
+
+.avatar-placeholder:hover {
+    border-color: var(--accent);
+
+    box-shadow:
+        0 0 15px rgba(255,106,0,0.3);
+}
+
+.avatar-text {
+    margin-top: 12px;
+
+    color: var(--text-muted);
+
+    text-align: center;
+
+    font-size: 13px;
+}
+
+/* botões */
+.profile-actions {
+    display: flex;
+    gap: 10px;
+
+    margin-top: 20px;
+}
+.admin-card {
+  background: linear-gradient(145deg, #111, #0a0a0a);
+  border: 1px solid rgba(255, 106, 0, 0.25);
+  border-radius: 16px;
+  box-shadow: 0 0 20px rgba(0,0,0,0.8);
+  transition: 0.3s ease;
+  color: var(--text-main);
+  position: relative;
+  overflow: hidden;
+}
+
+.admin-card::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: -120%;
+  width: 120%;
+  height: 100%;
+  background: linear-gradient(
+    120deg,
+    transparent,
+    rgba(255, 106, 0, 0.1),
+    transparent
+  );
+  transition: 0.6s;
+}
+
+.admin-card:hover {
+  transform: translateY(-6px) scale(1.02);
+  border-color: var(--accent);
+  box-shadow: 0 0 25px rgba(255,106,0,0.25);
+}
+
+.admin-card:hover::before {
+  left: 120%;
+}
+
+.admin-card h3 {
+  color: var(--accent);
+  text-shadow: var(--glow);
+}

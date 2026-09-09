@@ -1,0 +1,63 @@
+{% extends 'base.html' %}
+{% block titulo %} Main {% endblock %}
+{% block content %}
+<center>
+<h1> B3M-V1ND0/4 </h1>
+<hr>
+<h2>O G4M3D3X é um site para registro de jogos, onde é possível registrar os próprios jogos e deixar comentários nele!</h2>
+<h5>tudo isso com a presença de um mascote inesperado...</h5>
+</center>
+{% if recentes %}  
+<h1>Recentes </h1>
+<div class="game-grid">
+<br>
+{% for jogo in recentes %}
+    {% if jogo.status == "aprovado" or session.get("admin") %}
+
+    <a href="{{url_for('games.detalhe', id= jogo.id)}}">
+      <img  class="gameimg" src="{{url_for('static', filename = 'uploads/games/' + jogo.img)}}">
+    </a>
+    {% else %}
+    <h5>Nenhum jogo com essa categoria foi adicionado ou aprovado</h5>
+    {% endif %}
+{% endfor %}
+{% endif %}
+</div>
+<br>
+
+{% if promocoes %}  
+<h1>Em promoção </h1>
+<div class="game-grid">
+<br>
+{% for j in promocoes %}
+    {% if j.status == "aprovado" or session.get("admin") %}
+
+  <a href="{{url_for('games.detalhe', id= j.id)}}">
+    <img  class="gameimg" src="{{url_for('static', filename = 'uploads/games/' + j.img)}}">
+  </a>
+    {% else %}
+    <h5>Nenhum jogo com essa categoria foi adicionado ou aprovado</h5>
+    {% endif %}
+{% endfor %}
+{% endif %}
+</div>
+<br>
+
+{% if destaques %}  
+<h1>Destaques </h1>
+<div class="game-grid">
+<br>
+{% for jogod in destaques %}
+    {% if jogod.status == "aprovado" or session.get("admin") %}
+
+  <a href="{{url_for('games.detalhe', id= jogod.id)}}">
+    <img  class="gameimg" src="{{url_for('static', filename = 'uploads/games/' + jogod.img)}}">
+  </a>
+    {% else %}
+    <h5>Nenhum jogo com essa categoria foi adicionado ou aprovado</h5>
+    {% endif %}
+{% endfor %}
+{% endif %}
+</div>
+</div>
+{% endblock %}

@@ -1,0 +1,82 @@
+{% extends 'base.html' %}
+{% block titulo %}Admin{% endblock %}
+
+{% block content %}
+
+<div class="container py-5">
+
+    <h1 class="text-center admin mb-5">Painel Administrativo</h1>
+
+    <div class="row g-4 justify-content-center">
+
+        <!-- JOGOS -->
+        <div class="col-md-5">
+            <div class="card admin-card text-center h-100">
+
+                <div class="card-body d-flex flex-column justify-content-between">
+
+                    <div>
+                        <h3 class="mb-3">Jogos</h3>
+                        <p class="text-muted texto-form">
+                            Gerencie jogos cadastrados e aprove ou rejeite publicações.
+                        </p>
+                    </div>
+
+                    <a href="{{ url_for('games.admin_jogos') }}"
+                       class="btn btn-primary mt-3">
+                        Acessar
+                    </a>
+
+                </div>
+
+            </div>
+        </div>
+
+        <!-- USUÁRIOS -->
+        <div class="col-md-5">
+            <div class="card admin-card text-center h-100">
+
+                <div class="card-body d-flex flex-column justify-content-between">
+
+                    <div>
+                        <h3 class="mb-3">Usuários</h3>
+                        <p class="text-muted texto-form">
+                            Gerencie contas de usuários do sistema.
+                        </p>
+                    </div>
+
+                    <a href="{{ url_for('user.admin_user') }}"
+                       class="btn btn-danger mt-3">
+                        Acessar
+                    </a>
+
+                </div>
+
+            </div>
+        </div>
+         <div class="col-md-5">
+            <div class="card admin-card text-center h-100">
+
+                <div class="card-body d-flex flex-column justify-content-between">
+
+                    <div>
+                        <h3 class="mb-3">Comentários</h3>
+                        <p class="text-muted texto-form">
+                            Gerencie comentários e aprove ou rejeite publicações.
+                        </p>
+                    </div>
+
+                    <a href="{{ url_for('games.admin_jogos', tipo='comentarios') }}"
+                    class="btn btn-primary mt-3">
+                        Acessar
+                    </a>
+
+                </div>
+
+            </div>
+        </div>
+
+    </div>
+</div>
+
+{% endblock %}

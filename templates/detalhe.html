@@ -1,0 +1,119 @@
+{% extends 'base.html' %}
+{% block titulo %} Main {% endblock %}
+{% block content %}
+
+<div class="game-details">
+  <h1 class="game-title">{{jogo.nome}}</h1>
+
+  <img src="{{ url_for('static', filename='uploads/games/' + jogo.img) }}" id="detail">
+
+ <div class="game-info">
+
+  <div class="info-card">
+    <span class="label">Desenvolvedora</span>
+    <span class="value">{{jogo.dev}}</span>
+  </div>
+
+  <div class="info-card">
+    <span class="label">Data de lançamento</span>
+    <span class="value">{{jogo.data}}</span>
+  </div>
+
+  <div class="info-card">
+    <span class="label">Gênero</span>
+    <span class="value">{{jogo.genero}}</span>
+  </div>
+
+  {% if jogo.tipo() == 'fisico' %}
+    <div class="info-card">
+    <span class="label">Mídia</span>
+    <span class="value">{{jogo.midia}}</span>
+    </div>
+    <div class="info-card">
+    <span class="label">Console Alvo</span>
+    <span class="value">{{jogo.console}}</span>
+    </div>
+    <div class="info-card">
+
+{% for categoria in jogo.cat %}
+  <span class="category-badge">
+    {{ categoria }}
+  </span>
+{% endfor %}
+ 
+</div>
+
+ {% else %}
+  <div class="info-card">
+    <span class="label">Plataformas de distribuição</span>
+    <span class="value">{{jogo.distribuicao}}</span>
+  </div>
+
+  <div class="info-card">
+    <span class="label">Tamanho(GB)</span>
+    <span class="value">{{jogo.tamanho}} GB</span>
+  </div>
+   <div class="info-card">
+  {% for categoria in jogo.cat %}
+  <span class="category-badge">
+    {{ categoria }}
+  </span>
+  {% endfor %}
+   </div>
+  {% endif %}
+   <div class="info-card">
+  {% for plataforma in plataformas %}
+  <span class="category-badge">
+    {{ plataforma["nome"] }}
+  </span>
+  {% endfor %}
+   </div>
+
+
+</div>
+
+
+</div>
+{% if session.get("user_id") == jogo.autor or session.get("admin")%}
+      <div class="d-flex gap-2" style="margin-top: 50px;">
+      <a href="{{ url_for('games.editar_jogo', id=jogo.id) }}" class="btn btn-warning">
+      Editar
+      </a>
+
+      <form action="{{ url_for('games.excluir_jogo', id=jogo.id) }}"
+            method="POST"
+            onsubmit="return confirm('Tem certeza que deseja excluir o jogo {{ jogo.nome }}?');">
+      <button type="submit" class="btn btn-danger">
+            Excluir
+      </button>
+      </form>
+      </div>
+      <br>
+      <br>
+     <h3 class="comment-title">Comentários:</h3>
+{% endif %}
+<form method="POST" action="{{ url_for('games.comentar') }}" class="comment-form">
+  <textarea name="comentario" class="comment-input" placeholder="Escreva seu comentário..."></textarea>
+  <input type="hidden" name="id_jogo" value="{{ jogo.id }}">
+  <button type="submit" class="btn btn-primary">Enviar</button>
+</form>
+
+
+
+{% for comentario in comentarios %}
+  <div class="comment-card">
+    <p class="comment-author"><strong>Autor:</strong> {{ comentario[2] }}</p>
+    <p class="comment-text"><strong>Comentário:</strong> {{ comentario[1] }}</p>
+
+    {% if comentario[3] == session['user_id'] and session.get('usuario') %}
+      <form action="{{ url_for('games.excluir_comentario', id=comentario[0]) }}"
+            method="POST"
+            onsubmit="return confirm('Tem certeza que deseja excluir o comentário?');">
+        <input type="hidden" name="id_jogo" value="{{ jogo.id }}">
+        <button type="submit" class="btn btn-danger btn-sm">Excluir</button>
+      </form>
+    {% endif %}
+  </div>
+{% endfor %}
+
+{%endblock %}

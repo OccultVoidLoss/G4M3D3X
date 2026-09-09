@@ -1,0 +1,15 @@
+{% extends 'base.html' %}
+{% block titulo %} Cadastrar {% endblock %}
+{% block content %}
+  <div class="card shadow-sm p-4">
+    <h3 class="texto-form">Cadastrar Categoria</h3>
+    <hr />
+    <form method="POST">
+      <div class="mb-3">
+        <label class="form-label texto-form">Nome da Categoria</label>
+        <input type="text" name="nome" class="form-control" placeholder="Ex: Terror" />
+      </div>
+      <button type="submit" class="btn btn-success w-100">Salvar Categoria</button>
+    </form>
+  </div>
+{% endblock %}

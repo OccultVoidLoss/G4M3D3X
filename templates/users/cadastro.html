@@ -1,0 +1,64 @@
+{% extends 'base.html' %}
+
+{% block titulo %} Cadastro {% endblock titulo %}
+
+{% block content %}
+<style>
+      body {
+        background-image: url("static/uploads/cadastro.gif");
+        background-repeat: no-repeat;
+        background-size: cover;
+
+      }
+
+
+      body::before {
+        content: "";
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background: rgba(0, 0, 0, 0.90); 
+        z-index: -1;
+      }
+</style>
+   <form id="form">
+    <h1>C4D45TR0</h1>
+        <div class="mb-3">
+        <label class="form-label">Nome de usuário</label>
+        <input type="text" name="nome" id="nome" class="form-control" />
+      </div>
+      <div class="mb-3">
+        <label class="form-label">E-Mail</label>
+        <input type="email" name="email" id="email" class="form-control" />
+      </div>
+
+      <div class="mb-3">
+        <label class="form-label">Senha</label>
+        <input type="password" name="senha" id="senha" class="form-control" />
+      </div>
+            <div class="mb-3">
+        <label class="form-label">Tipo</label>
+        <select name="tipo" id="tipo" class="form-select" onchange="mostrarCampoTipo()">
+          <option value="admin">Admin</option>
+          <option value="comum">Comum</option>
+        </select>
+        <div class="mb-3" id="campo-senha">
+        <label class="form-label">Autorização de ADMIN</label>
+        <input type="password" name="aut" id="aut" class="form-control" />
+      </div>
+      </div>
+
+    <button type="submit" class="btn btn-success w-100">Entrar</button>
+    </form>
+
+      <script>
+    function mostrarCampoTipo() {
+      const tipo = document.getElementById('tipo').value;
+      document.getElementById('campo-senha').classList.toggle('d-none', tipo !== 'admin');;
+    }
+  </script>
+
+  <script src="static/js/cadastrar-user.js"></script>
+{% endblock%}

@@ -1,0 +1,47 @@
+{% extends 'base.html' %}
+{% block titulo %} Painel do usuário {% endblock %}
+
+{% block content %}
+
+<div class="profile-panel">
+
+    <div class="profile-info">
+
+        <h1 class="profile-title">
+            P3RF1L D0 USU4R10
+        </h1>
+
+        <div class="profile-item">
+            <span class="label">N0M3</span>
+            <span class="value" id="nome">Nome</span>
+        </div>
+
+        <div class="profile-item">
+            <span class="label">3M41L</span>
+            <span class="value" id="email">Email</span>
+        </div>
+
+
+
+        <div class="profile-actions">
+            <a   class="btn btn-warning">
+                Editar Perfil
+            </a>
+
+            <a  class="btn btn-warning">
+                Apagar Perfil
+            </a>
+            <a id="sair"  class="btn btn-warning">
+                Sair
+            </a>
+
+
+        </div>
+
+    </div>
+      <script src="static/js/painel.js"></script>
+
+
+</div>
+
+{% endblock %}

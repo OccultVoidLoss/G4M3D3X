@@ -1,0 +1,105 @@
+{% extends 'base.html' %}
+{% block titulo %} Cadastrar {% endblock %}
+{% block content %}
+  <div class="card shadow-sm p-4">
+    <h3 class="texto-form">Cadastrar Novo Jogo</h3>
+    <hr />
+    <form method="POST" enctype="multipart/form-data">
+      <div class="mb-3">
+        <label class="form-label texto-form">Nome</label>
+        <input type="text" name="nome" class="form-control" />
+      </div>
+
+      <div class="mb-3">
+        <label class="form-label texto-form">Desenvolvedora</label>
+        <input type="text" name="dev" class="form-control" />
+      </div>
+
+      <div class="row">
+        <div class="col-md-6 mb-3">
+          <label class="form-label texto-form">Data de Lançamento</label>
+          <input type="date" name="data" class="form-control" />
+        </div>
+
+        <div class="col-md-6 mb-3">
+          <label class="form-label texto-form">Gênero</label>
+          <input type="text" name="genero" class="form-control" />
+        </div>
+
+        <div class="col-md-12 mb-3">
+          <label class="form-label texto-form">Sinopse</label>
+          <textarea name="sinopse" class="form-control"></textarea>
+        </div>
+
+        <div class="col-md-12 mb-3">
+          <label class="form-label texto-form">Imagem</label>
+          <input type="file" name="img" class="form-control"> 
+        </div>
+
+          <div class="mb-3">
+        <label class="form-label texto-form">Tipo</label>
+        <select name="tipo" id="tipo" class="form-select" onchange="mostrarCampoTipo()">
+          <option value="fisico">Físico</option>
+          <option value="digital">Digital</option>
+        </select>
+
+        <div class="mb-3" id="campo-midia">
+          <label class="form-label texto-form">Midia</label>
+          <select name="midia" id="midia" class="form-select">
+            <option value="cartucho" >Cartucho</option>
+            <option value="disco" >Disco</option>
+          </select>
+        </div>
+
+        <div class="mb-3" id="campo-console">
+        <label class="form-label texto-form">Console alvo</label>
+        <input type="text" name="console" class="form-control" />
+        </div>
+
+        <div class="mb-3" id="campo-distribuicao">
+        <label class="form-label texto-form">Plataforma de distribuição</label>
+        <input type="text" name="distribuicao" class="form-control" />
+        </div>
+
+        <div class="mb-3" id="campo-tamanho">
+        <label class="form-label texto-form">Tamanho(GB)</label>
+        <input type="text" name="tamanho" class="form-control" />
+        </div>
+      </div>
+
+<div class="category-form">
+  <p>Categorias</p>
+  <br>
+  {% for c in categorias %}
+  <div>
+    <input type="checkbox" id="cat-{{c.id}}" name="categorias" value="{{c.id}}">
+    <label for="cat-{{c.id}}">{{c.nome}}</label>
+  </div>
+  {% endfor %}
+  </div>
+  <br>
+  <br>
+
+  <div class="category-form">
+  <p>Plataformas</p>
+  <br>
+  {% for p in plataformas %}
+  <div>
+    <input type="checkbox" id="plat-{{p.id}}" name="plataformas" value="{{p.id}}">
+    <label for="plat-{{p.id}}">{{p.nome}}</label>
+  </div>
+  {% endfor %}
+    <button type="submit" class="btn btn-success w-100">Salvar Jogo</button>
+    </form>
+  </div>
+        <script>
+    function mostrarCampoTipo() {
+      const tipo = document.getElementById('tipo').value;
+      document.getElementById('campo-midia').classList.toggle('d-none', tipo !== 'fisico');;
+      document.getElementById('campo-console').classList.toggle('d-none', tipo !== 'fisico');;
+      document.getElementById('campo-distribuicao').classList.toggle('d-none', tipo !== 'digital');;
+      document.getElementById('campo-tamanho').classList.toggle('d-none', tipo !== 'digital');;
+    }
+    window.onload = mostrarCampoTipo;
+  </script>
+{% endblock %}

@@ -1,0 +1,29 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<div class="card p-4 shadow-sm">
+
+    <h3 class="texto-form">Editar Categoria</h3>
+    <hr>
+
+    <form method="POST">
+
+        <div class="mb-3">
+            <label class="form-label texto-form">Nome da Categoria</label>
+
+            <input
+                type="text"
+                name="nome"
+                class="form-control"
+                value="{{ categoria.nome }}"
+            >
+        </div>
+
+        <button type="submit" class="btn btn-primary">
+            Atualizar Categoria
+        </button>
+
+    </form>
+
+</div>
+{% endblock %}

@@ -1,0 +1,109 @@
+{% extends 'base.html' %}
+{% block titulo %} Editar {% endblock %}
+{% block content %}
+  <div class="card shadow-sm p-4">
+    <h3 class="texto-form">Editar {{jogo.nome}}</h3>
+    <hr />
+    <form method="POST" enctype="multipart/form-data">
+      <div class="mb-3">
+        <label class="form-label texto-form">Nome</label>
+        <input type="text" name="nome" class="form-control" value="{{jogo.nome}}"/>
+      </div>
+
+      <div class="mb-3">
+        <label class="form-label texto-form">Desenvolvedora</label>
+        <input type="text" name="dev" class="form-control" value="{{jogo.dev}}"/>
+      </div>
+
+      <div class="row">
+        <div class="col-md-6 mb-3">
+          <label class="form-label texto-form">Data de Lançamento</label>
+          <input type="date" name="data" class="form-control" value="{{jogo.data}}"/>
+        </div>
+
+        <div class="col-md-6 mb-3">
+          <label class="form-label texto-form">Gênero</label>
+          <input type="text" name="genero" class="form-control" value="{{jogo.genero}}"/>
+        </div>
+
+        <div class="col-md-12 mb-3">
+          <label class="form-label texto-form">Sinopse</label>
+          <textarea name="sinopse" class="form-control" >{{jogo.sinopse}}</textarea>
+        </div>
+
+        <div class="col-md-12 mb-3">
+          <label class="form-label texto-form">Imagem</label>
+          <input type="file" name="img" class="form-control" value="{{jogo.img}}"> 
+        </div>
+
+        
+        <div class="mb-3">
+        <label class="form-label texto-form">Tipo</label>
+        <select name="tipo" id="tipo" class="form-select" onchange="mostrarCampoTipo()">
+          <option value="fisico" {% if jogo.tipo() == 'fisico' %}selected{% endif %}>Físico</option>
+          <option value="digital" {% if jogo.tipo() == 'digital' %}selected{% endif %}>Digital</option>
+        </select>
+
+
+        <div class="mb-3" id="campo-midia">
+          <label class="form-label texto-form">Midia</label>
+          <select name="midia" id="midia" class="form-select" value="{% if jogo.tipo() == 'fisico' %}{{ jogo.midia }}{% endif %}">
+            <option value="cartucho" >Cartucho</option>
+            <option value="disco" >Disco</option>
+          </select>
+        </div>
+
+
+        <div class="mb-3" id="campo-console">
+        <label class="form-label texto-form">Console alvo</label>
+        <input type="text" name="console" class="form-control"
+       value="{% if jogo.tipo() == 'fisico' %}{{ jogo.console }}{% endif %}" />
+        </div>
+        <div class="mb-3" id="campo-distribuicao">
+        <label class="form-label texto-form">Plataforma de distribuição</label>
+        <input type="text" name="distribuicao" class="form-control"
+       value="{% if jogo.tipo() == 'digital' %}{{ jogo.distribuicao }}{% endif %}" />
+        </div>
+        <div class="mb-3" id="campo-tamanho">
+        <label class="form-label texto-form">Tamanho(GB)</label>
+        <input type="text" name="tamanho" class="form-control"
+       value="{% if jogo.tipo() == 'digital' %}{{ jogo.tamanho }}{% endif %}" />
+        </div>
+      </div>
+
+<div class="category-form">
+  <p>Categorias</p>
+  {% for c in categorias %}
+  <div>
+    <input type="checkbox"
+       id="cat-{{c.id}}"
+       name="categorias"
+       value="{{c.id}}"
+       {% if jogo.cat and c.id in jogo.cat %}checked{% endif %}>
+    <label for="cat-{{c.id}}">{{c.nome}}</label>
+  </div>
+  {% endfor %}
+  </div>
+  <div class="category-form">
+  <p>Plataformas</p>
+  <br>
+  {% for p in plataformas %}
+  <div>
+    <input type="checkbox" id="plat-{{p.id}}" name="plataformas" value="{{p.id}}" {% if jogo.plat and p.id in jogo.plat %}checked{% endif %}>
+    <label for="plat-{{p.id}}">{{p.nome}}</label>
+  </div>
+  {% endfor %}
+    <button type="submit" class="btn btn-success w-100">Salvar Jogo</button>
+    </form>
+  </div>
+        <script>
+    function mostrarCampoTipo() {
+      const tipo = document.getElementById('tipo').value;
+      document.getElementById('campo-midia').classList.toggle('d-none', tipo !== 'fisico');;
+      document.getElementById('campo-console').classList.toggle('d-none', tipo !== 'fisico');;
+      document.getElementById('campo-distribuicao').classList.toggle('d-none', tipo !== 'digital');;
+      document.getElementById('campo-tamanho').classList.toggle('d-none', tipo !== 'digital');;
+    }
+    window.onload = mostrarCampoTipo;
+  </script>
+{% endblock %}

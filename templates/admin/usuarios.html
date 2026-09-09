@@ -1,0 +1,63 @@
+{% extends 'base.html' %}
+{% block titulo %} C0nf1d3nc14l {% endblock %}
+{% block content %}
+
+    <style>
+        body {
+        background-image: url("https://images.steamusercontent.com/ugc/44579027370373506/2EAA79460FE1EDEAE3E9324E8A7851E11D1EB4D3/?imw=637&imh=358&ima=fit&impolicy=Letterbox&imcolor=%23000000&letterbox=true");
+        background-repeat: no-repeat;
+        background-size: cover;
+
+        }
+
+
+        body::before {
+        content: "";
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background: rgba(0, 0, 0, 0.90); 
+        z-index: -1;
+        }
+    </style>
+  <div class="table-responsive">
+    <table class="table table-striped table-hover bg-white shadow-sm">
+      <thead class="table-dark">
+        <tr>
+          <th>Email</th>
+          <th>Senha</th>
+          <th></th>
+          <th></th>
+          <th></th>
+        </tr>
+      </thead>
+<tbody>
+  {% for user in users %}
+    {% if user.nome != session.get("usuario") %}
+      <tr>
+        <td>{{ user.email }}</td>
+        <td>{{ user.senha }}</td>
+        <td></td>
+        <td><a href="{{ url_for('user.promover', id=user.id) }}" class="btn btn-warning">promover</a></td>
+        <td><a href="{{ url_for('user.rebaixar', id=user.id) }}" class="btn btn-warning">rebaixar</a></td>
+        <td>
+          <form action="{{ url_for('user.excluir_user', id=user.id) }}"
+                method="POST"
+                onsubmit="return confirm('Tem certeza que deseja excluir esse usuário?');">
+            <button type="submit" class="btn btn-danger">Excluir</button>
+          </form>
+        </td>
+      </tr>
+    {% endif %}
+  {% else %}
+    <tr>
+      <td colspan="3" class="text-center">Não tem ninguém aqui</td>
+    </tr>
+  {% endfor %}
+</tbody>
+    </table>
+  </div>
+
+{% endblock %}

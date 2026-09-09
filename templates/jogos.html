@@ -1,0 +1,29 @@
+{% extends 'base.html' %}
+{% block titulo %} Coleção {% endblock %}
+{% block content %}
+   
+  <div class="d-flex justify-content-between align-items-center mb-3">
+    <h1>Jogos Cadastrados</h1>
+    {% if session.get('usuario') %}
+    <a href="{{ url_for('games.cadastrar_jogo') }}" class="btn btn-primary">+ Novo Jogo</a>
+    {% endif %}
+            <a class="btn btn-primary" href="{{url_for('categorias.listar_categorias')}}">C4T3G0R145</a>
+  </div>
+  <nav class="navbar navbar-light bg-light">
+  <form class="form-inline" method="POST" action="{{url_for('games.busca')}}">
+    <input class="form-control mr-sm-2" type="search" name="nome" placeholder="Search" aria-label="Search">
+    <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
+  </form>
+</nav>
+  <div class="game-grid">
+{% for jogo in jogos %}
+    {% if jogo.status == "aprovado" or session.get("admin") %}
+    {{ jogo.id }}
+  <a href="{{url_for('games.detalhe', id= jogo.id)}}">
+    <img  class="gameimg" src="{{url_for('static', filename = 'uploads/games/' + jogo.img)}}">
+  </a>
+    {% endif %}
+{% endfor %}
+</div>
+  
+{% endblock %}
